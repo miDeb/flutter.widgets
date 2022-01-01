@@ -334,29 +334,41 @@ class _PositionedListState extends State<PositionedList> {
             if (!reveal.isFinite) continue;
             final itemOffset =
                 reveal - viewport.offset.pixels + anchor * viewport.size.height;
-            positions.add(ItemPosition(
+            positions.add(
+              ItemPosition(
                 index: key.value,
-                itemLeadingEdge: itemOffset.round() /
+                itemLeadingEdgeFraction: itemOffset.round() /
                     scrollController.position.viewportDimension,
-                itemTrailingEdge: (itemOffset + box.size.height).round() /
-                    scrollController.position.viewportDimension));
+                itemTrailingEdgeFraction:
+                    (itemOffset + box.size.height).round() /
+                        scrollController.position.viewportDimension,
+                itemLeadingEdge: itemOffset.round(),
+                itemTrailingEdge: (itemOffset + box.size.height).round(),
+              ),
+            );
           } else {
             final itemOffset =
                 box.localToGlobal(Offset.zero, ancestor: viewport).dx;
-            positions.add(ItemPosition(
+            final leadingEdge = (widget.reverse
+                    ? scrollController.position.viewportDimension -
+                        (itemOffset + box.size.width)
+                    : itemOffset)
+                .round();
+            var trailingEdge = (widget.reverse
+                    ? scrollController.position.viewportDimension - itemOffset
+                    : (itemOffset + box.size.width))
+                .round();
+            positions.add(
+              ItemPosition(
                 index: key.value,
-                itemLeadingEdge: (widget.reverse
-                            ? scrollController.position.viewportDimension -
-                                (itemOffset + box.size.width)
-                            : itemOffset)
-                        .round() /
-                    scrollController.position.viewportDimension,
-                itemTrailingEdge: (widget.reverse
-                            ? scrollController.position.viewportDimension -
-                                itemOffset
-                            : (itemOffset + box.size.width))
-                        .round() /
-                    scrollController.position.viewportDimension));
+                itemLeadingEdge: leadingEdge,
+                itemTrailingEdge: trailingEdge,
+                itemLeadingEdgeFraction:
+                    leadingEdge / scrollController.position.viewportDimension,
+                itemTrailingEdgeFraction:
+                    trailingEdge / scrollController.position.viewportDimension,
+              ),
+            );
           }
         }
         widget.itemPositionsNotifier?.itemPositions.value = positions;

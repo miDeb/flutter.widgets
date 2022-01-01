@@ -21,13 +21,28 @@ abstract class ItemPositionsListener {
 /// Position information for an item in the list.
 class ItemPosition {
   /// Create an [ItemPosition].
-  const ItemPosition(
-      {required this.index,
-      required this.itemLeadingEdge,
-      required this.itemTrailingEdge});
+  const ItemPosition({
+    required this.index,
+    required this.itemLeadingEdgeFraction,
+    required this.itemTrailingEdgeFraction,
+    required this.itemLeadingEdge,
+    required this.itemTrailingEdge,
+  });
 
   /// Index of the item.
   final int index;
+
+  /// Distance in proportion of the viewport's main axis length from the leading
+  /// edge of the viewport to the leading edge of the item.
+  ///
+  /// May be negative if the item is partially visible.
+  final double itemLeadingEdgeFraction;
+
+  /// Distance in proportion of the viewport's main axis length from the leading
+  /// edge of the viewport to the trailing edge of the item.
+  ///
+  /// May be greater than one if the item is partially visible.
+  final double itemTrailingEdgeFraction;
 
   /// Distance in proportion of the viewport's main axis length from the leading
   /// edge of the viewport to the leading edge of the item.
@@ -47,15 +62,16 @@ class ItemPosition {
     final ItemPosition otherPosition = other;
     return otherPosition.index == index &&
         otherPosition.itemLeadingEdge == itemLeadingEdge &&
-        otherPosition.itemTrailingEdge == itemTrailingEdge;
+        otherPosition.itemTrailingEdge == itemTrailingEdge &&
+        otherPosition.itemLeadingEdgeFraction == itemLeadingEdgeFraction &&
+        otherPosition.itemTrailingEdgeFraction == itemTrailingEdgeFraction;
   }
 
   @override
-  int get hashCode =>
-      31 * (31 * (7 + index.hashCode) + itemLeadingEdge.hashCode) +
-      itemTrailingEdge.hashCode;
+  int get hashCode => Object.hash(index, itemLeadingEdge, itemTrailingEdge,
+      itemLeadingEdgeFraction, itemTrailingEdgeFraction);
 
   @override
   String toString() =>
-      'ItemPosition(index: $index, itemLeadingEdge: $itemLeadingEdge, itemTrailingEdge: $itemTrailingEdge)';
+      'ItemPosition(index: $index, itemLeadingEdge: $itemLeadingEdge, itemTrailingEdge: $itemTrailingEdge, itemLeadingEdgeFraction: $itemLeadingEdgeFraction, itemTrailingEdgeFraction: $itemTrailingEdgeFraction)';
 }
