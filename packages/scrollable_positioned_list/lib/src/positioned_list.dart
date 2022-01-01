@@ -337,27 +337,24 @@ class _PositionedListState extends State<PositionedList> {
             positions.add(
               ItemPosition(
                 index: key.value,
-                itemLeadingEdgeFraction: itemOffset.round() /
+                itemLeadingEdgeFraction:
+                    itemOffset / scrollController.position.viewportDimension,
+                itemTrailingEdgeFraction: (itemOffset + box.size.height) /
                     scrollController.position.viewportDimension,
-                itemTrailingEdgeFraction:
-                    (itemOffset + box.size.height).round() /
-                        scrollController.position.viewportDimension,
-                itemLeadingEdge: itemOffset.round(),
-                itemTrailingEdge: (itemOffset + box.size.height).round(),
+                itemLeadingEdge: itemOffset,
+                itemTrailingEdge: (itemOffset + box.size.height),
               ),
             );
           } else {
             final itemOffset =
                 box.localToGlobal(Offset.zero, ancestor: viewport).dx;
             final leadingEdge = (widget.reverse
-                    ? scrollController.position.viewportDimension -
-                        (itemOffset + box.size.width)
-                    : itemOffset)
-                .round();
+                ? scrollController.position.viewportDimension -
+                    (itemOffset + box.size.width)
+                : itemOffset);
             var trailingEdge = (widget.reverse
-                    ? scrollController.position.viewportDimension - itemOffset
-                    : (itemOffset + box.size.width))
-                .round();
+                ? scrollController.position.viewportDimension - itemOffset
+                : (itemOffset + box.size.width));
             positions.add(
               ItemPosition(
                 index: key.value,
