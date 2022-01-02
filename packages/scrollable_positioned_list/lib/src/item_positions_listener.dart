@@ -23,8 +23,8 @@ class ItemPosition {
   /// Create an [ItemPosition].
   const ItemPosition({
     required this.index,
-    required this.itemLeadingEdgeFraction,
-    required this.itemTrailingEdgeFraction,
+    required this.itemLeadingEdgePx,
+    required this.itemTrailingEdgePx,
     required this.itemLeadingEdge,
     required this.itemTrailingEdge,
   });
@@ -32,17 +32,17 @@ class ItemPosition {
   /// Index of the item.
   final int index;
 
-  /// Distance in proportion of the viewport's main axis length from the leading
+  /// Distance from the leading
   /// edge of the viewport to the leading edge of the item.
   ///
   /// May be negative if the item is partially visible.
-  final double itemLeadingEdgeFraction;
+  final double itemLeadingEdgePx;
 
-  /// Distance in proportion of the viewport's main axis length from the leading
+  /// Distance from the leading
   /// edge of the viewport to the trailing edge of the item.
   ///
   /// May be greater than one if the item is partially visible.
-  final double itemTrailingEdgeFraction;
+  final double itemTrailingEdgePx;
 
   /// Distance in proportion of the viewport's main axis length from the leading
   /// edge of the viewport to the leading edge of the item.

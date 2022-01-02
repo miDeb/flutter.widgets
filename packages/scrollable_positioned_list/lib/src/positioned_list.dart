@@ -337,12 +337,12 @@ class _PositionedListState extends State<PositionedList> {
             positions.add(
               ItemPosition(
                 index: key.value,
-                itemLeadingEdgeFraction:
+                itemLeadingEdge:
                     itemOffset / scrollController.position.viewportDimension,
-                itemTrailingEdgeFraction: (itemOffset + box.size.height) /
+                itemTrailingEdge: (itemOffset + box.size.height) /
                     scrollController.position.viewportDimension,
-                itemLeadingEdge: itemOffset,
-                itemTrailingEdge: (itemOffset + box.size.height),
+                itemLeadingEdgePx: itemOffset,
+                itemTrailingEdgePx: (itemOffset + box.size.height),
               ),
             );
           } else {
@@ -352,17 +352,17 @@ class _PositionedListState extends State<PositionedList> {
                 ? scrollController.position.viewportDimension -
                     (itemOffset + box.size.width)
                 : itemOffset);
-            var trailingEdge = (widget.reverse
+            final trailingEdge = (widget.reverse
                 ? scrollController.position.viewportDimension - itemOffset
                 : (itemOffset + box.size.width));
             positions.add(
               ItemPosition(
                 index: key.value,
-                itemLeadingEdge: leadingEdge,
-                itemTrailingEdge: trailingEdge,
-                itemLeadingEdgeFraction:
+                itemLeadingEdgePx: leadingEdge,
+                itemTrailingEdgePx: trailingEdge,
+                itemLeadingEdge:
                     leadingEdge / scrollController.position.viewportDimension,
-                itemTrailingEdgeFraction:
+                itemTrailingEdge:
                     trailingEdge / scrollController.position.viewportDimension,
               ),
             );
