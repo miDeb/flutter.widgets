@@ -63,15 +63,15 @@ class ItemPosition {
     return otherPosition.index == index &&
         otherPosition.itemLeadingEdge == itemLeadingEdge &&
         otherPosition.itemTrailingEdge == itemTrailingEdge &&
-        otherPosition.itemLeadingEdgeFraction == itemLeadingEdgeFraction &&
-        otherPosition.itemTrailingEdgeFraction == itemTrailingEdgeFraction;
+        otherPosition.itemLeadingEdgePx == itemLeadingEdgePx &&
+        otherPosition.itemTrailingEdgePx == itemTrailingEdgePx;
   }
 
   @override
   int get hashCode => Object.hash(index, itemLeadingEdge, itemTrailingEdge,
-      itemLeadingEdgeFraction, itemTrailingEdgeFraction);
+      itemLeadingEdgePx, itemTrailingEdgePx);
 
   @override
   String toString() =>
-      'ItemPosition(index: $index, itemLeadingEdge: $itemLeadingEdge, itemTrailingEdge: $itemTrailingEdge, itemLeadingEdgeFraction: $itemLeadingEdgeFraction, itemTrailingEdgeFraction: $itemTrailingEdgeFraction)';
+      'ItemPosition(index: $index, itemLeadingEdge: $itemLeadingEdge, itemTrailingEdge: $itemTrailingEdge, itemLeadingEdgePx: $itemLeadingEdgePx, itemTrailingEdgePx: $itemTrailingEdgePx)';
 }
